@@ -1,4 +1,8 @@
-## Versatile Conv
+## Versatile Filters
+
+Versatile Filters on Pytorch
+
+Paper: [Learning Versatile Filters for Efficient Convolutional Neural Networks](https://papers.nips.cc/paper/7433-learning-versatile-filters-for-efficient-convolutional-neural-networks)
 
 ### Files description
 `vcnn.py` is the implementation of Versatile Convolution (an example of VGG-16). The `VConv2d` class can be used to replace the `nn.Conv2d` in any CNN.
