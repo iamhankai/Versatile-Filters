@@ -1,10 +1,10 @@
 ## Versatile Filters
 
-Versatile Filters on Pytorch
-
-Paper: [Learning Versatile Filters for Efficient Convolutional Neural Networks (NeurIPS 2018)](https://papers.nips.cc/paper/7433-learning-versatile-filters-for-efficient-convolutional-neural-networks)
+Code for paper: [Learning Versatile Filters for Efficient Convolutional Neural Networks (NeurIPS 2018)](https://papers.nips.cc/paper/7433-learning-versatile-filters-for-efficient-convolutional-neural-networks)
 
 ### Files description
+Platform: Pytorch 0.4
+
 `vcnn.py` is the implementation of Versatile Convolution (an example of VGG-16). The `VConv2d` class can be used to replace the `nn.Conv2d` in any CNN.
 
 `imagenet-vcnn.py` is the script for training ImageNet on Cloud DLS.
@@ -17,11 +17,11 @@ In `VConv2d`:
 - `g`: g in Eq.(6)
 
 ## Performance
-| method                    | top1 acc | top5 acc |
-|---------------------------|----------|----------|
-| baseline                  | 71.5     | 90.1     |
-| spatial versatile         | 72.2     | 91.1     |
-| spatial+channel versatile | 70.4     | 89.6     |
+| backbone | method                    | top1 acc | top5 acc |
+|--------|---------------------------|----------|----------|
+| VGG-16 | baseline                  | 71.5     | 90.1     |
+|        | spatial versatile         | 72.2     | 91.1     |
+|        | spatial+channel versatile | 70.4     | 89.6     |
 
 ---
 Chinese:
@@ -39,8 +39,9 @@ Chinese:
 - `g`: g in Eq.(6)
 
 ### 精度
-| method                    | top1 acc | top5 acc |
-|---------------------------|----------|----------|
-| baseline                  | 71.5     | 90.1     |
-| spatial versatile         | 72.2     | 91.1     |
-| spatial+channel versatile | 70.4     | 89.6     |
+| backbone | method                    | top1 acc | top5 acc |
+|--------|---------------------------|----------|----------|
+| VGG-16 | baseline                  | 71.5     | 90.1     |
+|        | spatial versatile         | 72.2     | 91.1     |
+|        | spatial+channel versatile | 70.4     | 89.6     |
+
