@@ -1,47 +1,40 @@
 ## Versatile Filters
 
-Code for paper: [Learning Versatile Filters for Efficient Convolutional Neural Networks (NeurIPS 2018)](https://papers.nips.cc/paper/7433-learning-versatile-filters-for-efficient-convolutional-neural-networks)
+Code for paper: [Yunhe Wang, et al. Learning Versatile Filters for Efficient Convolutional Neural Networks (NeurIPS 2018)](https://papers.nips.cc/paper/7433-learning-versatile-filters-for-efficient-convolutional-neural-networks)
 
 ### Files description
 Platform: Pytorch 0.4
 
 `vcnn.py` is the implementation of Versatile Convolution (an example of VGG-16). The `VConv2d` class can be used to replace the `nn.Conv2d` in any CNN.
 
-`imagenet-vcnn.py` is the script for training ImageNet on Cloud DLS.
+`imagenet-vcnn.py` is the script for training ImageNet on Huawei Cloud DLS.
 
-`config.png` is a config example on Cloud DLS.
+### Getting Started
+Run `imagenet-vcnn.py` to train and test the model.
 
 ### Hyper-paprameters
 In `VConv2d`:
 - `delta`: (c-\hat{c}) in Eq.(6)
 - `g`: g in Eq.(6)
 
-## Performance
+### Performance
 | backbone | method                    | top1 acc | top5 acc |
 |--------|---------------------------|----------|----------|
-| VGG-16 | baseline                  | 71.5     | 90.1     |
-|        | spatial versatile         | 72.2     | 91.1     |
-|        | spatial+channel versatile | 70.4     | 89.6     |
+| VGG-16 | spatial versatile filters        | 72.2     | 91.1     |
 
----
-Chinese:
+### Citation
+If you use these models in your research, please cite:
+```
+@inproceedings{wang2018learning,
+  title={Learning versatile filters for efficient convolutional neural networks},
+  author={Wang, Yunhe and Xu, Chang and Chunjing, XU and Xu, Chao and Tao, Dacheng},
+  booktitle={Advances in Neural Information Processing Systems},
+  pages={1608--1618},
+  year={2018}
+}
+```
 
-### 目录说明
-`vcnn.py`是Versatile Conv应用于VGG-16的一个实现，其中的VConv2d可以替换任意网络中的Conv2d层
+### Contributing
+We appreciate all contributions. If you are planning to contribute back bug-fixes, please do so without any further discussion.
 
-`imagenet-vcnn.py`是ImageNet训练脚本（云上训练）
-
-`config.png`是我们在云上训练的配置
-
-### 超参
-`VConv2d`类中:
-- `delta`: (c-\hat{c}) in Eq.(6)
-- `g`: g in Eq.(6)
-
-### 精度
-| backbone | method                    | top1 acc | top5 acc |
-|--------|---------------------------|----------|----------|
-| VGG-16 | baseline                  | 71.5     | 90.1     |
-|        | spatial versatile         | 72.2     | 91.1     |
-|        | spatial+channel versatile | 70.4     | 89.6     |
-
+If you plan to contribute new features, utility functions or extensions to the core, please first open an issue and discuss the feature with us. Sending a PR without discussion might end up resulting in a rejected PR, because we might be taking the core in a different direction than you might be aware of.

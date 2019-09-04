@@ -1,3 +1,5 @@
+# 2019.07.24-Changed for building versatile filters
+#            Huawei Technologies Co., Ltd. <foss@huawei.com>
 import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
@@ -22,45 +24,6 @@ model_urls = {
     'vgg16_bn': 'https://download.pytorch.org/models/vgg16_bn-6c64b313.pth',
     'vgg19_bn': 'https://download.pytorch.org/models/vgg19_bn-c79401a0.pth',
 }
-
-# class VConv2d_old(nn.modules.conv._ConvNd):
-#   """VConv2d convolution block"""
-#   def __init__(self, in_channels, out_channels, kernel_size, stride=1,
-#                  padding=0, dilation=1, groups=1, bias=True):
-#     kernel_size = _pair(kernel_size)
-#     stride = _pair(stride)
-#     padding = _pair(padding)
-#     dilation = _pair(dilation)
-#     super(VConv2d, self).__init__(
-#         in_channels, out_channels, kernel_size, stride, padding, dilation,
-#         False, _pair(0), groups, bias)
-#     self.s_num = int(np.ceil(self.kernel_size[0]/2))
-#     self.delta = 1
-#     self.g = 1
-#     self.weight = nn.Parameter(torch.Tensor(
-#                 int(out_channels/self.s_num/(1+self.delta/self.g)), in_channels // groups, *kernel_size))
-#     self.reset_parameters()
-
-#   def forward(self, x):
-#     x_list = []
-#     s_num = self.s_num
-#     ch_ratio = (1+self.delta/self.g)
-#     ch_len = self.in_channels - self.delta
-#     for s in range(s_num):
-#         for start in range(0, self.delta+1, self.g):
-#             weight1 = self.weight[:, start:start+ch_len, s:self.kernel_size[0]-s, s:self.kernel_size[0]-s]
-#             if self.padding[0]-s < 0:
-#                 h = x.size(2)
-#                 x1 = x[:,start:start+ch_len,s:h-s,s:h-s]
-#                 padding1 = _pair(0)
-#             else:
-#                 x1 = x[:,start:start+ch_len,:,:]
-#                 padding1 = _pair(self.padding[0]-s)
-#             x_list.append(F.conv2d(x1, weight1, self.bias[int(self.out_channels*(s*ch_ratio+start)/s_num/ch_ratio):int(self.out_channels*(s*ch_ratio+start+1)/s_num/ch_ratio)], self.stride,
-#                       padding1, self.dilation, self.groups))
-#     x = torch.cat(x_list, 1)
-#     return x 
-
 
 class VConv2d(nn.modules.conv._ConvNd):
   """

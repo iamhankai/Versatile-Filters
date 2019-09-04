@@ -1,3 +1,5 @@
+# 2019.07.24-Changed for training and testing versatile filters
+#            Huawei Technologies Co., Ltd. <foss@huawei.com>
 import argparse
 import os
 import random
@@ -24,38 +26,12 @@ model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(models.__dict__[name]))
 
-import sys
-import torch
-from torch.utils.data import dataloader
-from torch.multiprocessing import reductions
-from multiprocessing.reduction import ForkingPickler
-
-default_collate_func = dataloader.default_collate
-
-def default_collate_override(batch):
-  dataloader._use_shared_memory = False
-  return default_collate_func(batch)
-
-setattr(dataloader, 'default_collate', default_collate_override)
-
-for t in torch._storage_classes:
-  if sys.version_info[0] == 2:
-    if t in ForkingPickler.dispatch:
-        del ForkingPickler.dispatch[t]
-  else:
-    if t in ForkingPickler._extra_reducers:
-        del ForkingPickler._extra_reducers[t]
-        
-
-
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
-#parser.add_argument('data', metavar='DIR', default='/tmp/data/hankai/imagenet',
-#                    help='path to dataset')
-parser.add_argument('--arch', '-a', metavar='ARCH', default='resnet18',
+parser.add_argument('--arch', '-a', metavar='ARCH', default='vgg16bn',
                     choices=model_names,
                     help='model architecture: ' +
                         ' | '.join(model_names) +
-                        ' (default: resnet18)')
+                        ' (default: vgg16bn)')
 parser.add_argument('-j', '--workers', default=16, type=int, metavar='N',
                     help='number of data loading workers (default: 4)')
 parser.add_argument('--epochs', default=130, type=int, metavar='N',
@@ -70,7 +46,7 @@ parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
                     help='momentum')
 parser.add_argument('--weight-decay', '--wd', default=1e-4, type=float,
                     metavar='W', help='weight decay (default: 1e-4)')
-parser.add_argument('--print-freq', '-p', default=10, type=int,
+parser.add_argument('--print-freq', '-p', default=50, type=int,
                     metavar='N', help='print frequency (default: 10)')
 parser.add_argument('--save-path', default='/tmp/data/hankai/', type=str, 
                     help='path to latest checkpoint (default: none)')
@@ -98,7 +74,7 @@ parser.add_argument('--data_url', type=str,
                     help='path to dataset')
 parser.add_argument('--train_url', type=str, help='train_dir')
 parser.add_argument('--tmp_data_dir', default='/cache/imagenet/', help='temp data dir')
-parser.add_argument('--tmp_save_dir', default='/cache/hankai/', help='temp save dir')
+parser.add_argument('--tmp_save_dir', default='/cache/save/', help='temp save dir')
 
 # Copy data to temp dir
 args = parser.parse_args()
