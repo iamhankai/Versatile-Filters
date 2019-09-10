@@ -4,8 +4,10 @@ Code for paper: [Yunhe Wang, et al. Learning Versatile Filters for Efficient Con
 
 This paper introduces versatile filters to construct efficient convolutional neural network. A series of secondary filters can be derived from a primary filter. These secondary filters all inherit in the primary filter without occupying more storage, but once been unfolded in computation they could significantly enhance the capability of the filter by integrating information extracted from different receptive fields. Besides spatial versatile filters, we additionally investigate versatile filters from the channel perspective. The new techniques are general to upgrade filters in existing CNNs, which are able to achieve comparable accuracy as that of original filters, but require less memory and FLOPs.
 
-![](./fig/versatile.png)
-![](./fig/versatile2.png)
+<img src="./fig/versatile.png" width="500" hegiht="180" align=center />
+
+<img src="./fig/versatile2.png" width="500" hegiht="180" align=center />
+
 
 ### Files description
 Platform: Pytorch 0.4
